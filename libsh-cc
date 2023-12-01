@@ -1,0 +1,33 @@
+#!/usr/bin/env sh
+
+libsh_pc="./libsh-pc"
+
+compile() {
+	src_file="$1"
+	# https://stackoverflow.com/questions/12152626/how-can-i-remove-the-extension-of-a-filename-in-a-shell-script
+	file_name="$(dirname $1)/$(basename $1 .c)"
+	
+	shift
+	# https://stackoverflow.com/questions/4900870/can-gcc-output-c-code-after-preprocessing
+	
+	cc -E "$src_file" "$@" | "$libsh_pc" --no-autoinclude > "$file_name.i"
+	cc -c "$file_name.i" "$@" "-o$file_name.o"
+}
+
+is_flag() {
+	expr $f : -.* > /dev/null
+	return
+}
+
+flags=""
+for f in "$@"; do
+	if is_flag "$f"; then
+		flags="$flags $f"
+	fi
+done
+
+for f in "$@"; do
+	if ! is_flag "$f"; then
+		compile "$f" $flags
+	fi
+done

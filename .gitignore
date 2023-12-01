@@ -1,0 +1,5 @@
+*.out
+libsh-pc
+*.dsl.c
+*.o
+*.i
