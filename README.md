@@ -50,14 +50,14 @@ ${
 	sort < test.txt > sorted.txt	
 }
 ```
-$() runs and captures a process, ${} runs a process and outputs it to stdout.
+``$(...)`` runs and captures a process, ``${...}`` runs a process and outputs it to stdout.
 For file redirection, either a literal path can be used (as in the example, in which case it automatically calls fopen and fclose)
 or a variable containing a valid FILE pointer.
 ```
-${cat test.txt}
+${cat < test.txt}
 
 FILE *f = fopen("test.txt", "r");
-${cat $f}
+${cat < $f}
 fclose(f);
 ```
 
