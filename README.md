@@ -79,9 +79,12 @@ printf("Result: %i\n", $?);
 
 ## Using
 The library can be included like any other library.
+
+
 The libsh DSL preprocessor/precompiler (libsh-pc) can either be invoked manually on any C source file (if no arguments are given, it reads from stdin and outputs to stdout)
 or be used via the libsh-cc shell script. This script automatically runs the libsh DSL preprocessor after the C preprocessor has run
 (this enables macros to be used within $() and ${} blocks), and then invokes ``cc`` to compile the preprocessed result to and object file (.o). It also
 passes any extra arguments given (compiler flags/options) to the compiler.
+
 Make sure to update the libsh_pc variable in the libsh-cc script, to wherever the libsh-pc binary is kept (or just to libsh-pc if it is kept inside a PATH
 directory).
